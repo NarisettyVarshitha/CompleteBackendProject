@@ -1,0 +1,20 @@
+const express = require("express");
+const router = express.Router();
+const authMiddleware = require("../middlewares/auth.middleware");//importing the auth middleware to protect the routes
+const musicController = require("../controllers/music.controller");//importing the music controller
+
+const multer = require("multer")//importing multer to handle file uploads
+
+const upload = multer({
+    storage : multer.memoryStorage()//to store the uploaded file in memory as a buffer
+});//to parse the incoming multipart/form-data request body
+
+
+router.post("/upload", authMiddleware.authArtist, upload.single("music"), musicController.createMusic);//route to create a new music entry
+
+
+router.post("/album", authMiddleware.authArtist, musicController.createAlbum);//route to create a new album entry
+
+
+
+module.exports = router;//to use this router in other files like controllers we have to export it
