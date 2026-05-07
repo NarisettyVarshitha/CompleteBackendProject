@@ -4,6 +4,7 @@ const connectDB = require("./src/db/db"); //importing the connectDB function fro
 
 connectDB(); //to connect to the database
 
-app.listen(8080, (req, res) => {
-  console.log("Server is running on port 8080");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, (req, res) => {
+  console.log(`Server is running on port ${PORT}`);
 });

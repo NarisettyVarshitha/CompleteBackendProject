@@ -108,9 +108,14 @@ async function loginUser(req, res){
 //creating api where only artists can create a song rather than normal user
 //creating in another file music.controller.js to keep the code organized and maintainable
 
-
+async function logoutUser(req, res){
+    res.clearCookie("token");//clearing the token cookie to log out the user    
+    res.status(200).json({
+        message : "User logged out successfully"
+    })
+}
 
 
 //exporting controller functions to use them in routes
 
-module.exports = { registerUser, loginUser };//to use this function in other files like routes we have to export it
+module.exports = { registerUser, loginUser, logoutUser };//to use this function in other files like routes we have to export it
